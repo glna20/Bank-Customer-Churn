@@ -1,4 +1,5 @@
 import streamlit as st
+import joblib
 
 one_hot_encoder = joblib.load("ct_xgb.pkl")
 scaler = joblib.load("sc_xgb.pkl")
