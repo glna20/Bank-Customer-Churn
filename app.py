@@ -4,8 +4,8 @@ import pandas as pd
 import numpy as np
 #!echo "streamlit\njoblib\npandas\nnumpy\nscikit-learn" > requirements.txt
 
-one_hot_encoder = joblib.load("ct_xgb.pkl")
-scaler = joblib.load("sc_xgb.pkl")
+ct = joblib.load("ct_xgb.pkl")
+sc = joblib.load("sc_xgb.pkl")
 
 st.title('Bank Customer Churn Prediction App')
 
