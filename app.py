@@ -1,6 +1,7 @@
-%%writefile requirements.txt
-streamlit
+with open("requirements.txt", "w") as f:
+    f.write("""streamlit
 joblib
+""")
 
 one_hot_encoder = joblib.load("ct_xgb.pkl")
 scaler = joblib.load("sc_xgb.pkl")
