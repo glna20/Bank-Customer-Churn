@@ -66,19 +66,4 @@ if Prediction_Ranking:
   st.write(f"Prediction: {predicted}")
 
 else:
-  st.write('Please enter the values and use prediction button')
-
-
-Prediction_Ranking = st.button("Prediction Ranking")
-
-if Prediction_Ranking:
-  churn_prob = churn_model.predict_proba(X)
-  if churn_prob[ : ,1] >= 0.70:
-    st.write('High Risk of Churn')
-  elif churn_prob[ : ,1] >= 0.40:
-    st.write('Medium Risk of Churn')
-  else:
-    st.write('Low Risk of Churn')
-
-
-
+  st.write('No Churn Ranking because predicted, No Churn')
