@@ -36,7 +36,7 @@ if prediction_button:
   is_active_member = 1 if is_active_member == "Yes" else 0
 
   X = [credit_score, geography, gender, age, tenure, balance, num_of_products, has_credit_card, is_active_member, estimated_salary]
-  X = ct.fit_transform(X)
+  X = ct.fit_transform(X).reshape(1, -1)
  # X = np.array(ct.fit_transform(X))
 
   cols_to_standardise =  [5, 6, 7, 8, 9, 12]
