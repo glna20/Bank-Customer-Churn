@@ -74,10 +74,7 @@ if Prediction_Ranking:
     st.write('High Risk of Churn')
   elif churn_prob[ : ,1] >= 0.40:
     st.write('Medium Risk of Churn')
-  elif churn_prob[ : ,1] > 0:
-    st.write('Low Risk of Churn')
   else:
-    st.write('No Risk, because No Churn.')
+    st.write('Low Risk of Churn')
 
-else:
-  st.write('No Risk, because No Churn')
+
