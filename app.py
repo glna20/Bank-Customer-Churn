@@ -2,6 +2,8 @@ import streamlit as st
 import joblib
 import pandas as pd 
 import numpy as np
+
+!pip install xgboost
 #!echo "streamlit\njoblib\npandas\nnumpy\nscikit-learn" > requirements.txt
 
 ct = joblib.load("ct_xgb.pkl")
