@@ -53,7 +53,7 @@ if prediction_button:
   X_scaled = row.copy()
   X_scaled[mask] = scaled
 
-  prediction = churn_model.predict(X_scaled)
+  prediction = churn_model.predict(X_scaled.tolist())
   predicted = 'Churn' if prediction[0] == 1 else 'Not Churn'
 
   st.write(f"Prediction: {predicted}")
@@ -65,7 +65,7 @@ else:
 Prediction_Ranking = st.button("Prediction Ranking")
 
 if Prediction_Ranking:
-  churn_prob = churn_model.predict_proba(X_scaled)
+  churn_prob = churn_model.predict_proba(X_scaled.tolist())
   if churn_prob[ : ,1] >= 0.70:
     st.write('High Risk of Churn')
   elif churn_prob[ : ,1] >= 0.40:
