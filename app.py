@@ -6,6 +6,7 @@ import numpy as np
 
 ct = joblib.load("ct_xgb.pkl")
 sc = joblib.load("sc_xgb.pkl")
+churn_model = joblib.load("selected_model_xgb.pkl")
 
 st.title('Bank Customer Churn Prediction App')
 
