@@ -30,32 +30,32 @@ estimated_salary = st.number_input("Estimated Salary", min_value=0.0, max_value=
 
 st.divider()
 
+has_credit_card = 1 if has_credit_card == "Yes" else 0
+is_active_member = 1 if is_active_member == "Yes" else 0
+
+X = [credit_score, geography, gender, age, tenure, balance, num_of_products, has_credit_card, is_active_member, estimated_salary]
+X_encode = np.array(X).reshape(1, -1)
+X_encode = ct.transform(X_encode).flatten()
+
+# Convert strings to floats
+X_encode = np.array(X_encode, dtype=float).reshape(1, -1)
+
+# Identify the values to scale (>1 and not binary)
+row = X_encode[0]               # 1D array
+mask = (row > 1)                 # boolean mask (1D)
+
+# Scale only the selected values
+scaled = sc.transform(row[mask].reshape(1, -1)).flatten()
+
+# Place scaled values back into original row
+X_scaled = row.copy()
+X_scaled[mask] = scaled
+
+x_for_pred = np.array([X_scaled])
+
 prediction_button = st.button("Predict Churn")
 
 if prediction_button:
-
-  has_credit_card = 1 if has_credit_card == "Yes" else 0
-  is_active_member = 1 if is_active_member == "Yes" else 0
-
-  X = [credit_score, geography, gender, age, tenure, balance, num_of_products, has_credit_card, is_active_member, estimated_salary]
-  X_encode = np.array(X).reshape(1, -1)
-  X_encode = ct.transform(X_encode).flatten()
-
-# Convert strings to floats
-  X_encode = np.array(X_encode, dtype=float).reshape(1, -1)
-
-# Identify the values to scale (>1 and not binary)
-  row = X_encode[0]               # 1D array
-  mask = (row > 1)                 # boolean mask (1D)
-
-# Scale only the selected values
-  scaled = sc.transform(row[mask].reshape(1, -1)).flatten()
-
-# Place scaled values back into original row
-  X_scaled = row.copy()
-  X_scaled[mask] = scaled
-
-  x_for_pred = np.array([X_scaled])
 
   prediction = churn_model.predict(x_for_pred)
   predicted = 'Churn' if prediction[0] == 1 else 'Not Churn'
