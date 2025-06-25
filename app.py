@@ -54,7 +54,9 @@ if prediction_button:
   X_scaled = row.copy()
   X_scaled[mask] = scaled
 
-  prediction = churn_model.predict(X_scaled.tolist())
+  x_for_pred = np.array([X_scaled])
+
+  prediction = churn_model.predict(x_for_pred)
   predicted = 'Churn' if prediction[0] == 1 else 'Not Churn'
 
   st.write(f"Prediction: {predicted}")
