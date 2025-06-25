@@ -35,14 +35,25 @@ if prediction_button:
   has_credit_card = 1 if has_credit_card == "Yes" else 0
   is_active_member = 1 if is_active_member == "Yes" else 0
 
-  X = [credit_score, geography, gender, age, tenure, balance, num_of_products, has_credit_card, is_active_member, estimated_salary]
-  X = ct.fit_transform(X).reshape(1, -1)
- # X = np.array(ct.fit_transform(X))
+   X = [credit_score, geography, gender, age, tenure, balance, num_of_products, has_credit_card, is_active_member, estimated_salary]
+   X_encode = np.array(X).reshape(1, -1)
+   X_encode = ct.transform(X_encode).flatten()
 
-  cols_to_standardise =  [5, 6, 7, 8, 9, 12]
-  X[:, cols_to_standardise] = sc.transform(X[:, cols_to_standardise])
+# Convert strings to floats
+   X_encode = np.array(X_encode, dtype=float).reshape(1, -1)
 
-  prediction = churn_model.predict(X)
+# Identify the values to scale (>1 and not binary)
+   row = X_encode[0]               # 1D array
+   mask = (row > 1)                 # boolean mask (1D)
+
+# Scale only the selected values
+  scaled = sc.transform(row[mask].reshape(1, -1)).flatten()
+
+# Place scaled values back into original row
+  X_scaled = row.copy()
+  X_scaled[mask] = scaled
+
+  prediction = churn_model.predict(X_scaled)
   predicted = 'Churn' if prediction[0] == 1 else 'Not Churn'
 
   st.write(f"Prediction: {predicted}")
