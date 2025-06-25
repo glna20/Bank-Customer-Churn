@@ -69,7 +69,7 @@ else:
 Prediction_Ranking = st.button("Prediction Ranking")
 
 if Prediction_Ranking:
-  churn_prob = churn_model.predict_proba(X_scaled.tolist())
+  churn_prob = churn_model.predict_proba(x_for_pred)
   if churn_prob[ : ,1] >= 0.70:
     st.write('High Risk of Churn')
   elif churn_prob[ : ,1] >= 0.40:
